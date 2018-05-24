@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <title>CRUD para empleados</title>
 </head>
 <body>
@@ -66,9 +66,12 @@
                 <td><?=$empleado->apellido;?></td>
                 <td><?=$empleado->id_departamento;?></td>
                 <td><?php
-                     $total = $empleado->pago_hora*$empleado->horas;
+                     $salario = $empleado->pago_hora*$empleado->horas;
+                     $renta = $salario * 0.10;
+                     $afp = $salario * 0.04;
+                     $isss = $salario * 0.07;
+                     $total = $salario - ($renta + $afp + $isss);
                      echo $total;
-                       
                      ?>
                          
                      </td>
@@ -78,10 +81,10 @@
                 <button onclick="window.location.href='index.php?controller=empleados&action=eliminar&id=<?=$empleado->id;?>'">Eliminar</button>
                 </td>
             </tr>
-        <?php } ?>
+        <?php $totalf+=$total;  } ?>
         </tbody>
         </table>
-        <h3 class="text-center">Total de planilla: $ 0.00</h3>
+        <h3 class="text-center">Total de planilla: $ <?php echo $totalf; ?></h3>
 
     </div>
 </body>
